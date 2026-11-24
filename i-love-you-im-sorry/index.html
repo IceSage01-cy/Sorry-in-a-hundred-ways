@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>I love you, I’m sorry</title>
+<style>
+:root{--bg:#eef5ff;--card:#fff;--ink:#14253f;--soft:#5a7396;--accent:#2b6fd6;--line:#cfe0f5}
+@media (prefers-color-scheme:dark){:root{--bg:#08111f;--card:#0f1c33;--ink:#e6f0ff;--soft:#93b0d6;--accent:#6aa8ff;--line:#1d3557;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65;overflow-x:hidden}
+main{max-width:720px;margin:0 auto;padding:0 18px 80px;text-align:center}
+h1{font-size:clamp(2rem,7vw,3.4rem);font-weight:normal;font-style:italic;color:var(--accent);margin:56px 0 8px}
+.lead{color:var(--soft);font-size:1.1rem;max-width:480px;margin:0 auto 26px}
+.sky{cursor:pointer;touch-action:manipulation;position:relative;width:100%;max-width:520px;aspect-ratio:100/115;margin:0 auto;border-radius:24px;background:radial-gradient(circle at 50% 40%,#1b3a6b,#07101f 75%);box-shadow:0 14px 50px rgba(43,111,214,.25);overflow:hidden}
+.sky.done{animation:beat 1.8s ease-in-out infinite}
+@keyframes beat{50%{transform:scale(1.02);box-shadow:0 14px 70px rgba(90,162,255,.55)}}
+.st{position:absolute;width:6%;max-width:26px;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;padding:0;pointer-events:none}
+.st::before{content:"";position:absolute;inset:14%;background:#8fa8c9;opacity:.6;transition:.35s;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.st.hv::before,.st:focus-visible::before{opacity:1;transform:scale(1.3)}
+.st:focus-visible{outline:2px solid #bcd8ff;outline-offset:-2px;border-radius:50%}
+.st.on{filter:drop-shadow(0 0 4px #5aa2ff) drop-shadow(0 0 10px rgba(90,162,255,.6))}
+.st.on::before{background:#e4f1ff;opacity:1;inset:6%;animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{50%{transform:scale(1.18) rotate(8deg)}}
+.ph{position:absolute;left:50%;top:39%;width:27%;aspect-ratio:1;margin:-13.5% 0 0 -13.5%;border-radius:50%;object-fit:cover;border:3px solid #e4f1ff;box-shadow:0 0 30px 8px rgba(90,162,255,.6);opacity:0;transform:scale(.6);transition:all 1.6s;pointer-events:none;z-index:2}
+.ph.show{opacity:1;transform:none}
+.cap{position:absolute;left:0;right:0;bottom:8px;padding:0 14px;color:#fff;pointer-events:none;min-height:96px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;z-index:3}
+.cap b{font-size:clamp(1.4rem,6vw,2rem);font-weight:normal}
+.cap i{font-size:.95rem;color:#bcd8ff}
+.cap small{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#9db8dc}
+.prog{margin:16px 0 4px;color:var(--soft)}
+.bar{height:6px;border-radius:9px;background:var(--line);max-width:300px;margin:0 auto;overflow:hidden}
+.bar div{height:100%;width:0;background:var(--accent);transition:width .4s}
+.btn{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:11px 24px;background:var(--accent);color:#fff;margin:14px 5px 0}
+.btn.ghost{background:none;color:var(--accent);border:1px solid var(--accent)}
+.bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.bg span{position:absolute;bottom:-50px;color:var(--accent);opacity:0;animation:drift linear infinite}
+@keyframes drift{0%{transform:translate(0,0) rotate(-12deg);opacity:0}12%{opacity:var(--o)}88%{opacity:var(--o)}100%{transform:translate(var(--dx),-115vh) rotate(16deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.bg{display:none}}
+main{position:relative;z-index:1}
+[hidden]{display:none!important}
+#lw{display:none;margin-top:44px}
+#lw.show{display:block}
+.letter{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,6vw,54px);text-align:left;font-size:1.13rem;box-shadow:0 12px 44px rgba(43,111,214,.14)}
+.letter p{margin:0 0 1.1em;opacity:0;transform:translateY(8px);animation:in .9s forwards}
+.big{font-style:italic;color:var(--accent);font-size:1.3rem}
+.sig{text-align:right}
+@keyframes in{to{opacity:1;transform:none}}
+#talk{margin-top:40px;animation:in 1.2s both}
+.ask{font-size:clamp(1.8rem,6vw,2.6rem);font-style:italic;color:var(--accent);margin:0}
+#reply{max-width:460px;margin:20px auto 0;font-size:1.15rem;font-style:italic}
+#mus{position:fixed;top:12px;right:12px;z-index:5;font:inherit;font-size:.9rem;cursor:pointer;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--accent)}
+.fly{position:fixed;bottom:-30px;color:var(--accent);pointer-events:none;z-index:9;animation:up 3.5s ease-out forwards}
+@keyframes up{to{transform:translateY(-105vh) rotate(20deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg" aria-hidden="true"></div>
+<audio id="aud" src="assets/@coldplay - Sparks (Lyrics).mp3" loop preload="auto"></audio>
+<button id="mus" hidden aria-label="Toggle background music">♪ Music off</button>
+<main>
+<h1>I love you, I’m sorry</h1>
+<p class="lead">A hundred stars, a hundred ways of saying it. Touch them all, and see what they make.</p>
+<div class="sky" id="sky">
+<img class="ph" id="ph" src="assets/photo.JPEG" alt="Us" onerror="this.remove()">
+<div class="cap" id="cap" aria-live="polite"><small>tap a star</small></div>
+</div>
+<div class="prog"><span id="n">0</span> / 100 lit</div>
+<div class="bar"><div id="b"></div></div>
+<button class="btn ghost" id="all">Light them all for me</button>
+<button class="btn" id="open" hidden>Open my letter</button>
+
+<section id="lw">
+<h1 style="font-size:clamp(1.6rem,5vw,2.2rem);margin:0 0 18px">For you</h1>
+<article class="letter" id="letter"></article>
+<div id="talk" hidden>
+<p class="ask">Can we talk?</p>
+<button class="btn" id="yes">Yes, let’s talk</button>
+<button class="btn ghost" id="later">I need a little time</button>
+<p id="reply"></p>
+</div>
+</section>
+</main>
+<script>
+/* ===== OPTIONAL SETTINGS (all can stay empty) =====
+   HIS_NAME  : his name, shown at the top of the letter, e.g. "Mark"
+   YOUR_NAME : your name, shown at the end of the letter, e.g. "Anna"
+   MEMORY    : a memory you treasure, e.g. "our late-night drives with the windows down"
+   TALK_LINK : opens when he taps "Yes, let's talk", e.g. "sms:+639171234567?body=Yes, let's talk" */
+var HIS_NAME="My Love",YOUR_NAME="Justine",MEMORY="our late-night drives while listening to music",TALK_LINK="";
+
+var S=[["English","I’m sorry"],["Filipino","Patawad"],["Spanish","Lo siento"],["French","Je suis désolé"],["German","Es tut mir leid"],["Italian","Mi dispiace"],["Portuguese","Desculpa"],["Japanese","ごめんなさい"],["Korean","미안해"],["Mandarin","对不起"],["Cantonese","對唔住"],["Hindi","माफ़ करना"],["Arabic","أنا آسف"],["Russian","Прости меня"],["Turkish","Özür dilerim"],["Dutch","Het spijt me"],["Swedish","Förlåt"],["Norwegian","Unnskyld"],["Danish","Undskyld"],["Finnish","Anteeksi"],["Greek","Συγγνώμη"],["Polish","Przepraszam"],["Czech","Omlouvám se"],["Slovak","Prepáč"],["Hungarian","Sajnálom"],["Romanian","Îmi pare rău"],["Bulgarian","Съжалявам"],["Serbian","Izvini"],["Croatian","Oprosti"],["Slovenian","Oprosti"],["Ukrainian","Вибач"],["Hebrew","אני מצטער"],["Persian","متاسفم"],["Urdu","معاف کرنا"],["Bengali","আমি দুঃখিত"],["Tamil","மன்னித்துவிடு"],["Telugu","క్షమించు"],["Malayalam","ക്ഷമിക്കണം"],["Kannada","ಕ್ಷಮಿಸು"],["Marathi","माफ कर"],["Gujarati","માફ કરજો"],["Punjabi","ਮੈਨੂੰ ਮਾਫ਼ ਕਰ ਦੇ"],["Nepali","माफ गर्नुहोस्"],["Sinhala","සමාවෙන්න"],["Thai","ขอโทษ"],["Vietnamese","Xin lỗi"],["Indonesian","Maafkan aku"],["Malay","Maafkan saya"],["Swahili","Samahani"],["Zulu","Ngiyaxolisa"],["Afrikaans","Jammer"],["Xhosa","Uxolo"],["Amharic","ይቅርታ"],["Yoruba","Má bínú"],["Igbo","Ndo"],["Hausa","Yi hakuri"],["Somali","Waan ka xumahay"],["Latin","Me paenitet"],["Irish","Tá brón orm"],["Scottish Gaelic","Tha mi duilich"],["Welsh","Mae’n ddrwg gen i"],["Icelandic","Fyrirgefðu"],["Catalan","Ho sento"],["Basque","Barkatu"],["Galician","Síntoo"],["Hawaiian","E kala mai"],["Māori","Aroha mai"],["Samoan","Fa’amalie atu"],["Tongan","Fakamolemole"],["Cebuano","Pasayloa ko"],["Ilocano","Pakawanen"],["Hiligaynon","Pasaylo-a ako"],["Lithuanian","Atsiprašau"],["Latvian","Piedod"],["Estonian","Vabandust"],["Albanian","Më fal"],["Macedonian","Извини"],["Bosnian","Oprosti"],["Maltese","Skużani"],["Luxembourgish","Et deet mir leed"],["Esperanto","Pardonu min"],["Georgian","მაპატიე"],["Armenian","Ներիր ինձ"],["Azerbaijani","Bağışla məni"],["Kazakh","Кешір"],["Uzbek","Kechir"],["Mongolian","Уучлаарай"],["Burmese","တောင်းပန်ပါတယ်"],["Khmer","សុំទោស"],["Lao","ຂໍໂທດ"],["Pashto","بخښنه"],["Kurdish","Bibore"],["Haitian Creole","Padon"],["Quechua","Pampachaway"],["Malagasy","Miala tsiny"],["Shona","Ndine urombo"],["Kinyarwanda","Mbabarira"],["Twi","Mepa wo kyɛw"],["Taiwanese Hokkien","歹勢"],["Morse code","... --- .-. .-. -.--"]];
+var R=["for the words I said too fast","for the silence I let grow","for every time I defended instead of listening","for making you feel alone in it","for being proud when I should have been kind","for the moments I forgot how lucky I am","for hurting the one who holds me up","for letting being right matter more than you","for the walls I put up when you reached for me","for every night this hurt kept you awake"];
+var $=function(i){return document.getElementById(i)},sky=$("sky"),cap=$("cap"),lit=0,stars=[];
+/* Stars are laid out as a heart. A tap/click picks the NEAREST star, so every star is reliably clickable. */
+var PTS=[[24.37,11.35],[31.04,10.42],[37.68,11.50],[62.32,11.50],[68.96,10.42],[75.63,11.35],[18.39,14.10],[24.64,17.18],[31.02,15.02],[37.25,17.20],[43.49,14.51],[56.51,14.51],[62.75,17.20],[68.98,15.02],[75.36,17.18],[81.61,14.10],[13.77,18.39],[19.26,21.09],[24.89,22.92],[30.84,20.11],[36.78,22.82],[42.67,20.74],[47.81,19.03],[52.19,19.03],[57.33,20.74],[63.22,22.82],[69.16,20.11],[75.11,22.92],[80.74,21.09],[86.23,18.39],[11.21,23.81],[17.54,26.62],[23.88,28.14],[30.68,25.46],[36.60,28.40],[42.86,26.11],[50.00,24.57],[57.14,26.11],[63.40,28.40],[69.32,25.46],[76.12,28.14],[82.46,26.62],[88.79,23.81],[11.26,29.68],[18.74,32.66],[25.01,33.30],[30.47,30.76],[41.41,32.15],[47.00,30.05],[53.00,30.05],[58.59,32.15],[69.53,30.76],[74.99,33.30],[81.26,32.66],[88.74,29.68],[13.67,35.17],[23.27,38.24],[29.96,36.85],[35.59,34.37],[40.97,37.93],[46.99,35.65],[53.01,35.65],[59.03,37.93],[64.41,34.37],[70.04,36.85],[76.73,38.24],[86.33,35.17],[17.60,39.98],[22.32,44.22],[28.69,42.35],[35.18,40.52],[40.80,44.01],[46.86,41.21],[53.14,41.21],[59.20,44.01],[64.82,40.52],[71.31,42.35],[77.68,44.22],[82.40,39.98],[27.42,48.12],[34.24,46.26],[46.84,47.03],[53.16,47.03],[65.76,46.26],[72.58,48.12],[32.66,51.87],[39.91,50.01],[46.08,52.68],[53.92,52.68],[60.09,50.01],[67.34,51.87],[37.86,55.67],[42.82,59.70],[47.00,57.77],[53.00,57.77],[57.18,59.70],[62.14,55.67],[47.20,64.20],[52.80,64.20],[50.00,69.52]];
+PTS.forEach(function(p,i){var b=document.createElement("button");b.className="st";b.tabIndex=0;
+b.style.left=p[0]+"%";b.style.top=p[1]+"%";b.setAttribute("aria-label","Star "+(i+1));
+b.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();light(i,true)}};
+sky.insertBefore(b,$("ph")||cap);stars[i]=b});
+function nearest(e){var r=sky.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*100,y=(e.clientY-r.top)/r.height*100*1.15,best=-1,bd=1e9;
+PTS.forEach(function(p,i){var dx=p[0]-x,dy=p[1]*1.15-y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=i}});
+return bd<36?best:-1}
+var hv=-1;
+sky.addEventListener("click",function(e){var i=nearest(e);if(i>=0)light(i,true)});
+sky.addEventListener("mousemove",function(e){var i=nearest(e);if(i===hv)return;if(hv>=0)stars[hv].classList.remove("hv");hv=i;if(i>=0)stars[i].classList.add("hv")});
+sky.addEventListener("mouseleave",function(){if(hv>=0)stars[hv].classList.remove("hv");hv=-1});
+function light(i,say){var b=stars[i];if(say){var s=S[i];cap.innerHTML="<small></small><b></b><i></i>";cap.children[0].textContent=s[0];cap.children[1].textContent=s[1];cap.children[2].textContent="I’m sorry "+R[i%R.length]+"."}
+if(b.classList.contains("on"))return;b.classList.add("on");lit++;
+$("n").textContent=lit;$("b").style.width=lit+"%";
+if(lit>=100){sky.classList.add("done");$("open").hidden=false;$("all").hidden=true;var ph=$("ph");if(ph)ph.classList.add("show");
+cap.innerHTML="<b>That’s all of them.</b><i>Every star was for you.</i>"}}
+$("all").onclick=function(){var i=0,t=setInterval(function(){while(i<100&&stars[i].classList.contains("on"))i++;if(i>=100){clearInterval(t);return}light(i,i%4===0)},70)};
+
+/* Floating background hearts */
+(function(){var bg=$("bg");for(var i=0;i<24;i++){var e=document.createElement("span"),d=14+Math.random()*14;
+e.textContent="♥";e.style.left=Math.random()*100+"%";e.style.fontSize=(12+Math.random()*26)+"px";
+e.style.setProperty("--o",(.12+Math.random()*.2).toFixed(2));e.style.setProperty("--dx",(Math.random()*120-60)+"px");
+e.style.animationDuration=d+"s";e.style.animationDelay=(-Math.random()*d)+"s";bg.appendChild(e)}})();
+
+function esc(t){return t.replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+$("open").onclick=function(){
+var to=esc(HIS_NAME.trim())||"My love",me=esc(YOUR_NAME.trim()),m=esc(MEMORY.trim());
+var mem=m?"I keep thinking about "+m+". That’s the real us. That’s who I want to be for you every single day, not only when it’s easy.":"I keep thinking about all the small, ordinary moments we share, the ones that quietly told me this is home. That’s the real us. That’s who I want to be for you every single day, not only when it’s easy.";
+var ps=[to+",",
+"I’m sorry. Not the quick kind of sorry that makes a hard moment go away, but the slow kind, the kind that sits in my chest and won’t leave until I’ve said it properly.",
+"I hurt you. I saw it in your face, and even when I pretended not to, I felt it. I keep going back over the things I said when I was scared, or tired, or too proud to simply say “I need you.” That wasn’t you I was fighting. It was my worst moment, and you were the one standing close enough to be hit by it. You never deserved that.",
+mem,
+"Here is what I believe with my whole heart: we will fight again. Two people who care this much will sometimes collide. But no matter how big it gets, no matter how loud the argument or how heavy the silence afterwards, I will always find my way back to you. And I believe you will find your way back to me. Not because we’re perfect, but because we keep choosing each other when it would be easier not to.",
+"So here is what I promise. I’ll listen before I defend. I’ll say sorry sooner. I’ll reach for your hand first instead of waiting to be reached for. And I’ll remember that being right has never felt as good as being yours.",
+"You are my favorite person to laugh with and the safest place I know. If you need space, I’ll give it, and I’ll still be here when you’re ready. If you’re ready now, I’m here too, with a hundred ways of saying it and one thing underneath all of them:",
+"<span class=\"big\">I love you. I’m sorry. Please come home to me.</span>",
+"Yours, always"+(me?",<br>"+me:"")+" ♥"];
+$("letter").innerHTML=ps.map(function(p,i){return "<p"+(i===ps.length-1?" class=\"sig\"":"")+" style=\"animation-delay:"+(i*0.9)+"s\">"+p+"</p>"}).join("");
+var w=$("lw");w.classList.add("show");w.scrollIntoView({behavior:"smooth"});
+setTimeout(function(){$("talk").hidden=false;$("talk").scrollIntoView({behavior:"smooth",block:"center"})},ps.length*900+1500)};
+
+function hearts(){for(var i=0;i<34;i++){var e=document.createElement("span");e.className="fly";e.textContent="♥";e.style.left=Math.random()*100+"%";e.style.fontSize=(16+Math.random()*30)+"px";e.style.animationDelay=Math.random()*1.2+"s";document.body.appendChild(e);setTimeout(function(x){x.remove()},5000,e)}}
+$("yes").onclick=function(){$("reply").textContent="Thank you for hearing me out. I love you, and I’m so grateful. ♥";$("yes").hidden=$("later").hidden=true;hearts();if(TALK_LINK)setTimeout(function(){location.href=TALK_LINK},1400)};
+$("later").onclick=function(){$("reply").textContent="Of course. Take all the time you need. I’ll be right here, loving you, whenever you’re ready. ♥";$("yes").hidden=$("later").hidden=true};
+
+/* Background music: put your song at assets/music.mp3 */
+var a=$("aud"),mb=$("mus"),on=false,started=false;
+a.volume=.5;a.addEventListener("loadedmetadata",function(){mb.hidden=false});
+function setM(v){on=v;mb.textContent=v?"♪ Music on":"♪ Music off";if(v){var p=a.play();if(p&&p.catch)p.catch(function(){on=false;mb.textContent="♪ Music off"})}else a.pause()}
+mb.onclick=function(){setM(!on)};
+document.addEventListener("pointerdown",function(e){if(started)return;started=true;if(!mb.contains(e.target)&&!mb.hidden)setM(true)});
+</script>
+</body>
+</html>

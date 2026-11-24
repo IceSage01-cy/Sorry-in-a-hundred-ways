@@ -1,0 +1,6 @@
+Put your two files in this folder with these exact names:
+
+  music.mp3   <- your background song
+  photo.jpg   <- a photo of the two of you (a square-ish photo looks best)
+
+Then delete this note (optional).
